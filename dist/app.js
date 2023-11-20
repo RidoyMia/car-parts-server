@@ -22,7 +22,7 @@ const product_route_1 = __importDefault(require("./app/modules/product/product.r
 const service_route_1 = __importDefault(require("./app/modules/services/service.route"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: 'https://car-repairing-server-8s5gphlkr-ridoymia.vercel.app',
+    origin: 'http://localhost:5173',
     credentials: true,
 }));
 app.use(express_1.default.json());
