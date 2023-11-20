@@ -5,22 +5,28 @@ import { Iservices } from "./services.interface";
 
 const createProduct = async(req:Request,res:Response,next:NextFunction) =>{
     try {
+        
       const productData = req.body;
-      const result = await servicesService.createProduct(productData);
+      console.log(productData);
+      const result = await servicesService.createProductService(productData);
       res.status(200).send({
         action : true,
         result
       })  
     } catch (error) {
+
+        //@ts-ignore
+        console.log(error?.message)
         res.status(400).send({
-            message : 'something went wrong'
+            message : error,
+            
         })
     }
 }
 
 const getAllProduct =async(req:Request,res:Response,next:NextFunction) : Promise<Iservices[] | any> =>{
     try {
-        const result = await servicesService.getAllProduct();
+        const result = await servicesService.getAllProductService();
         res.status(200).send({
             action : true,
             result
@@ -34,7 +40,7 @@ const getAllProduct =async(req:Request,res:Response,next:NextFunction) : Promise
 const getSingleProductController = async(req:Request,res:Response,next:NextFunction) : Promise<Iservices | any> =>{
 try {
     const id = req.params.id;
-    const result = await servicesService.getSingleProduct(id);
+    const result = await servicesService.getSingleProductService(id);
     res.status(200).send({
         action : true,
         result
