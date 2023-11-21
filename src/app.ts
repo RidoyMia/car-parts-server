@@ -14,10 +14,10 @@ import ServicesRouter from "./app/modules/services/service.route";
 
 const app : Application = express()
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173','https://car-pats-client.vercel.app'],
   credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  optionsSuccessStatus: 204,
+ 
   allowedHeaders: 'Content-Type, Authorization',
 }))
 app.use(express.json())

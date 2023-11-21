@@ -26,6 +26,7 @@ app.use((0, cors_1.default)({
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     optionsSuccessStatus: 204,
+    allowedHeaders: 'Content-Type, Authorization',
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({
