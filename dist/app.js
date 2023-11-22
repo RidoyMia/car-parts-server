@@ -20,6 +20,7 @@ const Blog_route_1 = __importDefault(require("./app/modules/Blog/Blog.route"));
 const Expert_route_1 = __importDefault(require("./app/modules/Expert/Expert.route"));
 const product_route_1 = __importDefault(require("./app/modules/product/product.route"));
 const service_route_1 = __importDefault(require("./app/modules/services/service.route"));
+const User_routes_1 = __importDefault(require("./app/modules/User/User.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: ['http://localhost:5173', 'https://car-pats-client.vercel.app'],
@@ -36,6 +37,7 @@ app.use('/api/v1/blog', Blog_route_1.default);
 app.use('/api/v1/expert', Expert_route_1.default);
 app.use('/api/v1/product', product_route_1.default);
 app.use('/api/v1/service', service_route_1.default);
+app.use('/api/v1/user', User_routes_1.default);
 app.use('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(http_status_codes_1.StatusCodes.OK).send({
         result: 'app is running'

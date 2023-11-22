@@ -13,7 +13,7 @@ const createUserController = async(req:Request,res:Response,next:NextFunction) :
         })
     } catch (error) {
         res.status(400).send({
-            message : 'something went wrong'
+            message : error
         })
     }
 }
