@@ -22,10 +22,9 @@ const product_route_1 = __importDefault(require("./app/modules/product/product.r
 const service_route_1 = __importDefault(require("./app/modules/services/service.route"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://car-pats-client.vercel.app'],
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    optionsSuccessStatus: 204,
     allowedHeaders: 'Content-Type, Authorization',
 }));
 app.use(express_1.default.json());

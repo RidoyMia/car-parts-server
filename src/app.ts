@@ -11,6 +11,7 @@ import BlogRouter from "./app/modules/Blog/Blog.route";
 import ExpertRouter from "./app/modules/Expert/Expert.route";
 import ProductRouter from "./app/modules/product/product.route";
 import ServicesRouter from "./app/modules/services/service.route";
+import userRouter from "./app/modules/User/User.routes";
 
 const app : Application = express()
 app.use(cors({
@@ -29,6 +30,7 @@ app.use('/api/v1/blog',BlogRouter)
 app.use('/api/v1/expert',ExpertRouter)
 app.use('/api/v1/product',ProductRouter)
 app.use('/api/v1/service',ServicesRouter)
+app.use('/api/v1/user',userRouter)
 app.use('/',async(req:Request,res:Response)=>{
     res.status(StatusCodes.OK).send({
        result : 'app is running'
