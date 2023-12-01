@@ -35,8 +35,12 @@ const getAllUsers =async(options : IuserOptions) : Promise<Iuser[] | any> =>{
     return result
 
 }
+const isAdmin =async(email : string) : Promise<Iuser[] | any> =>{
+    const result = await UserModel.find({email : email});
+    return result
+} 
 
 
 export const userService = {
-    createUser,SignInUser,getAllUsers
+    createUser,SignInUser,getAllUsers,isAdmin
 }

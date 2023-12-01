@@ -12,6 +12,8 @@ import ExpertRouter from "./app/modules/Expert/Expert.route";
 import ProductRouter from "./app/modules/product/product.route";
 import ServicesRouter from "./app/modules/services/service.route";
 import userRouter from "./app/modules/User/User.routes";
+import ServicePaymentRouter from "./app/modules/ServicePayment/Service.route";
+import ProductPaymentRouter from "./app/modules/ProductPayment/ProductPayment.route";
 
 const app : Application = express()
 app.use(cors({
@@ -19,7 +21,7 @@ app.use(cors({
   credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 
-    allowedHeaders: 'Content-Type, Authorization',
+  allowedHeaders: 'Content-Type, accesstoken',
  
   
 }))
@@ -33,6 +35,8 @@ app.use('/api/v1/expert',ExpertRouter)
 app.use('/api/v1/product',ProductRouter)
 app.use('/api/v1/service',ServicesRouter)
 app.use('/api/v1/user',userRouter)
+app.use('/api/v1/servicePayment',ServicePaymentRouter)
+app.use('/api/v1/productPayment',ProductPaymentRouter)
 app.use('/',async(req:Request,res:Response)=>{
     res.status(StatusCodes.OK).send({
        result : 'app is running'

@@ -5,8 +5,10 @@ import jwt, { Secret } from "jsonwebtoken"
 import { config } from "../../../config";
 const createUserController = async(req:Request,res:Response,next:NextFunction) :Promise<Iuser | any> =>{
     try {
+        console.log(req.body,'new here');
         const userInfo:Iuser = req.body;
         const result = await userService.createUser(userInfo);
+        console.log(result);
         res.status(200).send({
             action : true,
             result
@@ -22,11 +24,12 @@ const SignInUserController = async(req:Request,res:Response,next:NextFunction) :
       
         //@ts-ignore
         const {email}:string = req.body;
+    console.log(email);
         const result = await userService.SignInUser(email);
-      
+      console.log(result);
         if(result[0]?.email){
             console.log(result);
-            const accesstoken = await jwt.sign({email : result?.email,role : result?.role},config.accesstoken as Secret ,{expiresIn : '3d'});
+            const accesstoken = await jwt.sign({email : result[0]?.email,role : result[0]?.role},config.accesstoken as Secret ,{expiresIn : '3d'});
            console.log(accesstoken);
             res.status(200).send({
                 action : true,
@@ -58,8 +61,32 @@ const getAllUsersController = async(req:Request,res:Response,next:NextFunction) 
         })
     }
 }
+const IsAdingController = async(req:Request,res:Response,next:NextFunction) :Promise<Iuser | any> =>{
+ try {
+    const email = req.params.email;
+    //@ts-ignore
+    const {accesstoken}:string = req.headers;
+ 
+    if(email && accesstoken){
+        const verified = await jwt.verify(accesstoken,config.accesstoken as Secret);
+      
+        //@ts-ignore
+        if(verified?.email){
+            //@ts-ignore
+         const result = await userService.isAdmin(verified?.email);
+         res.status(200).send({
+            action : true,
+            role : result[0].role
+
+         })
+        }
+    }
+ } catch (error) {
+    
+ }    
+}
 
 export const UserController = {
     createUserController,
-    SignInUserController,getAllUsersController
+    SignInUserController,getAllUsersController,IsAdingController
 }

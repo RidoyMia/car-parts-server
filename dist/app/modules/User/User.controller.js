@@ -27,7 +27,7 @@ const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
     catch (error) {
         res.status(400).send({
-            message: 'something went wrong'
+            message: error
         });
     }
 });
