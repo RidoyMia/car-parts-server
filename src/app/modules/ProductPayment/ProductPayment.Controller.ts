@@ -7,15 +7,16 @@ import SSLCommerzPayment from "sslcommerz-lts"
 import { ObjectId } from "mongodb";
 import { productModel } from "../product/product.model";
 import { ProductPaymentModel } from "./ProductPayment.model";
+import { ServicePaymentServices } from "./ProductPayment.services";
 const createProductPayment = async(req:Request,res:Response,next:NextFunction) =>{
     const session  = mongoose.startSession()
     try {
         (await session).startTransaction();
         const productInfo = req.body;
-        console.log(productInfo,'product order info');
+      
         //@ts-ignore
         const gettingProdut = await  productModel.find({_id : productInfo.id})
-        console.log(gettingProdut,'gettingpor');
+      
         const newId = new ObjectId().toString()
         const data = {
             total_amount: gettingProdut[0].price,
@@ -54,11 +55,11 @@ const createProductPayment = async(req:Request,res:Response,next:NextFunction) =
             let GatewayPageURL = apiResponse.GatewayPageURL
             const orderInfo = {...productInfo,transaction : newId,paid : false}
             const insertOrder = await ProductPaymentModel.create({...orderInfo});
-            console.log(insertOrder,'order completed');
+          
             res.status(200).send({
               url : GatewayPageURL
             })
-            console.log('Redirecting to: ', GatewayPageURL)
+           
         });
         (await session).commitTransaction()
     } catch (error) {
@@ -73,11 +74,11 @@ const createProductPayment = async(req:Request,res:Response,next:NextFunction) =
 const productPaymentUpdate = async(req:Request,res:Response,next:NextFunction) =>{
     try {
         const id = req.params.id;
-        console.log(id,'transaction');
+     
         const result = await ProductPaymentModel.updateOne({transaction : id},{$set : {
             paid : true
         }})
-        res.redirect(`http://localhost:5173/success/${id}`)
+        res.redirect(`http://localhost:5173/productDetails/${id}`)
         
     } catch (error) {
         res.status(400).send({
@@ -85,7 +86,37 @@ const productPaymentUpdate = async(req:Request,res:Response,next:NextFunction) =
         })
     }
 }
+const getProductPayment = async(req:Request,res:Response,next:NextFunction) =>{
+    try {
+        const id = req.params.id;
+       
+        const result = await ProductPaymentModel.find({transaction : id}).populate('id');
+        res.status(200).send({
+            action : true,
+            result
+        })
+    } catch (error) {
+        res.status(400).send({
+            message : 'something went wrong'
+        })
+    }
+}
+
+const getSingleUsersPaymentInfoController = async(req:Request,res:Response,next:NextFunction) =>{
+    try {
+     const email = req.params.email;
+     const result = await ServicePaymentServices.getSingleUsersPaymentInfo(email);
+     res.status(200).send({
+        action : true,
+        result
+     })
+    } catch (error) {
+        res.status(200).send({
+            message : 'something went wrong'
+        })
+    }
+}
 
 export const ProductPaymentController = {
-    createProductPayment,productPaymentUpdate
+    createProductPayment,productPaymentUpdate,getProductPayment,getSingleUsersPaymentInfoController
 }

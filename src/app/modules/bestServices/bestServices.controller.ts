@@ -10,7 +10,7 @@ const createServicesController = async(req:Request,res:Response,next:NextFunctio
             result
         })
     } catch (error) {
-        console.log(error);
+      
         res.status(400).send({
            message : 'something went wrong'
         })
@@ -19,7 +19,7 @@ const createServicesController = async(req:Request,res:Response,next:NextFunctio
 const getAllService = async(req:Request,res:Response,next:NextFunction) =>{
     try {
         const result = await BestServices.getAllService()
-        console.log(result);
+
         res.status(200).send({
             action : true,
             result

@@ -39,6 +39,10 @@ const getAllUsers = (options) => __awaiter(void 0, void 0, void 0, function* () 
             }] }).skip(skip).limit(10);
     return result;
 });
+const isAdmin = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield User_model_1.UserModel.find({ email: email });
+    return result;
+});
 exports.userService = {
-    createUser, SignInUser, getAllUsers
+    createUser, SignInUser, getAllUsers, isAdmin
 };

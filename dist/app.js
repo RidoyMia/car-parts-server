@@ -21,12 +21,14 @@ const Expert_route_1 = __importDefault(require("./app/modules/Expert/Expert.rout
 const product_route_1 = __importDefault(require("./app/modules/product/product.route"));
 const service_route_1 = __importDefault(require("./app/modules/services/service.route"));
 const User_routes_1 = __importDefault(require("./app/modules/User/User.routes"));
+const Service_route_1 = __importDefault(require("./app/modules/ServicePayment/Service.route"));
+const ProductPayment_route_1 = __importDefault(require("./app/modules/ProductPayment/ProductPayment.route"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: ['http://localhost:5173', 'https://car-pats-client.vercel.app'],
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
+    allowedHeaders: 'Content-Type, accesstoken',
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({
@@ -38,6 +40,8 @@ app.use('/api/v1/expert', Expert_route_1.default);
 app.use('/api/v1/product', product_route_1.default);
 app.use('/api/v1/service', service_route_1.default);
 app.use('/api/v1/user', User_routes_1.default);
+app.use('/api/v1/servicePayment', Service_route_1.default);
+app.use('/api/v1/productPayment', ProductPayment_route_1.default);
 app.use('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(http_status_codes_1.StatusCodes.OK).send({
         result: 'app is running'

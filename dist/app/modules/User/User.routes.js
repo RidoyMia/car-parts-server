@@ -9,4 +9,5 @@ const userRouter = express_1.default.Router();
 userRouter.post('/create', User_controller_1.UserController.createUserController);
 userRouter.post('/signin', User_controller_1.UserController.SignInUserController);
 userRouter.get('/all', User_controller_1.UserController.getAllUsersController);
+userRouter.get('/:email', User_controller_1.UserController.IsAdingController);
 exports.default = userRouter;

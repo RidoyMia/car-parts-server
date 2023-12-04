@@ -7,7 +7,7 @@ const createProduct = async(req:Request,res:Response,next:NextFunction) =>{
     try {
         
       const productData = req.body;
-      console.log(productData);
+    
       const result = await servicesService.createProductService(productData);
       res.status(200).send({
         action : true,
@@ -16,7 +16,7 @@ const createProduct = async(req:Request,res:Response,next:NextFunction) =>{
     } catch (error) {
 
         //@ts-ignore
-        console.log(error?.message)
+     
         res.status(400).send({
             message : error,
             

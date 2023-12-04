@@ -8,6 +8,7 @@ import { IServicePayment } from "./ServicePayment.interface";
 import { config } from "../../../config";
 import { ObjectId } from "mongodb";
 import { ServicePaymentModel } from "./ServicePayment.model";
+import { ServicePaymentServices } from "./ServicePayment.service";
 const createPaymentController = async (req: Request, res: Response, next: NextFunction) => {
     const session = await mongoose.startSession();  // Added await
     try {
@@ -97,8 +98,23 @@ const createPaymentController = async (req: Request, res: Response, next: NextFu
       })
     }
   }
+
+  const getSingleUsersPaymentInfoServiceController = async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+      const email = req.params.email;
+      const result = await ServicePaymentServices.getSingleUsersPaymentInfoService(email);
+      res.status(200).send({
+        action : true,
+        result
+      })
+    } catch (error) {
+      res.status(400).send({
+        message : 'something went wrong'
+      })
+    }
+  }
   
   export const PaymentController = {
-    createPaymentController,updatePaymentController,getPaymentData
+    createPaymentController,updatePaymentController,getPaymentData,getSingleUsersPaymentInfoServiceController
   };
   

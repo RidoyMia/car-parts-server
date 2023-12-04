@@ -18,8 +18,10 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../../../config");
 const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        
         const userInfo = req.body;
         const result = yield User_service_1.userService.createUser(userInfo);
+        
         res.status(200).send({
             action: true,
             result
@@ -32,15 +34,17 @@ const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
 });
 const SignInUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b, _c;
     try {
         //@ts-ignore
         const { email } = req.body;
+       
         const result = yield User_service_1.userService.SignInUser(email);
+        
         if ((_a = result[0]) === null || _a === void 0 ? void 0 : _a.email) {
-            console.log(result);
-            const accesstoken = yield jsonwebtoken_1.default.sign({ email: result === null || result === void 0 ? void 0 : result.email, role: result === null || result === void 0 ? void 0 : result.role }, config_1.config.accesstoken, { expiresIn: '3d' });
-            console.log(accesstoken);
+           
+            const accesstoken = yield jsonwebtoken_1.default.sign({ email: (_b = result[0]) === null || _b === void 0 ? void 0 : _b.email, role: (_c = result[0]) === null || _c === void 0 ? void 0 : _c.role }, config_1.config.accesstoken, { expiresIn: '3d' });
+           
             res.status(200).send({
                 action: true,
                 accesstoken
@@ -69,7 +73,28 @@ const getAllUsersController = (req, res, next) => __awaiter(void 0, void 0, void
         });
     }
 });
+const IsAdingController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const email = req.params.email;
+        //@ts-ignore
+        const { accesstoken } = req.headers;
+        if (email && accesstoken) {
+            const verified = yield jsonwebtoken_1.default.verify(accesstoken, config_1.config.accesstoken);
+            //@ts-ignore
+            if (verified === null || verified === void 0 ? void 0 : verified.email) {
+                //@ts-ignore
+                const result = yield User_service_1.userService.isAdmin(verified === null || verified === void 0 ? void 0 : verified.email);
+                res.status(200).send({
+                    action: true,
+                    role: result[0].role
+                });
+            }
+        }
+    }
+    catch (error) {
+    }
+});
 exports.UserController = {
     createUserController,
-    SignInUserController, getAllUsersController
+    SignInUserController, getAllUsersController, IsAdingController
 };
