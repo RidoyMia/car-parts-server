@@ -118,7 +118,11 @@ const getSingleUsersPaymentInfoController = async(req:Request,res:Response,next:
 }
 const getTotalProductPayment =  async(req:Request,res:Response,next:NextFunction) =>{
     try {
-        const result = await ServicePaymentServices.totalProducPayment();
+        //@ts-ignore
+        const page = parseInt(req.query.page)
+        console.log();
+        const result = await ServicePaymentServices.totalProducPayment(page);
+        console.log(result);
         res.status(200).send({
             action : true,
             result

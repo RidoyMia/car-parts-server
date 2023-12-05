@@ -114,7 +114,22 @@ const createPaymentController = async (req: Request, res: Response, next: NextFu
     }
   }
   
+  const getAllServicesPaymentController = async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+      //@ts-ignore
+      const page = parseInt(req.query.page)
+      const result = await ServicePaymentServices.getAllServicesPayment(page)
+      res.status(200).send({
+        action : true,
+        result
+      })
+    } catch (error) {
+      res.status(400).send({
+        message : 'something went wrong'
+      })
+    }
+  }
   export const PaymentController = {
-    createPaymentController,updatePaymentController,getPaymentData,getSingleUsersPaymentInfoServiceController
+    createPaymentController,updatePaymentController,getPaymentData,getSingleUsersPaymentInfoServiceController,getAllServicesPaymentController
   };
   
