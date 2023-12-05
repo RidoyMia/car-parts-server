@@ -6,6 +6,7 @@ const getSingleUsersPaymentInfoService = async(email : string) : Promise<IServic
     return result
 }
 
+
 export const ServicePaymentServices = {
     getSingleUsersPaymentInfoService
 }

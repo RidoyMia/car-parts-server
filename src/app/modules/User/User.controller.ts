@@ -26,14 +26,14 @@ const SignInUserController = async(req:Request,res:Response,next:NextFunction) :
         const {email}:string = req.body;
     
         const result = await userService.SignInUser(email);
-      
+        console.log(result,'signin user response');
         if(result[0]?.email){
             
             const accesstoken = await jwt.sign({email : result[0]?.email,role : result[0]?.role},config.accesstoken as Secret ,{expiresIn : '3d'});
          
             res.status(200).send({
                 action : true,
-                
+                role : result[0]?.role,
                 accesstoken
                
             })

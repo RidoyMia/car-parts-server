@@ -14,7 +14,6 @@ const service_services_1 = require("./service.services");
 const createProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productData = req.body;
-        
         const result = yield service_services_1.servicesService.createProductService(productData);
         res.status(200).send({
             action: true,
@@ -23,7 +22,6 @@ const createProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     }
     catch (error) {
         //@ts-ignore
-        
         res.status(400).send({
             message: error,
         });

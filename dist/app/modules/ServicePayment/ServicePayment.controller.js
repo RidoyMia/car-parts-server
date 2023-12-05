@@ -20,6 +20,7 @@ const services_model_1 = require("../services/services.model");
 const config_1 = require("../../../config");
 const mongodb_1 = require("mongodb");
 const ServicePayment_model_1 = require("./ServicePayment.model");
+const ServicePayment_service_1 = require("./ServicePayment.service");
 const createPaymentController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const session = yield mongoose_1.default.startSession(); // Added await
     try {
@@ -65,7 +66,7 @@ const createPaymentController = (req, res, next) => __awaiter(void 0, void 0, vo
             // Redirect the user to payment gateway
             let GatewayPageURL = apiResponse.GatewayPageURL;
             const orderData = Object.assign(Object.assign({}, paymentInfo), { transaction: data === null || data === void 0 ? void 0 : data.tran_id, paid: false });
-          
+            //   console.log(orderData,'orderdata');
             const insertOrder = yield (yield ServicePayment_model_1.ServicePaymentModel.create(Object.assign({}, orderData))).$session(session);
             res.status(200).send({ url: GatewayPageURL });
         }));
@@ -108,6 +109,21 @@ const getPaymentData = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         });
     }
 });
+const getSingleUsersPaymentInfoServiceController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const email = req.params.email;
+        const result = yield ServicePayment_service_1.ServicePaymentServices.getSingleUsersPaymentInfoService(email);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.PaymentController = {
-    createPaymentController, updatePaymentController, getPaymentData
+    createPaymentController, updatePaymentController, getPaymentData, getSingleUsersPaymentInfoServiceController
 };

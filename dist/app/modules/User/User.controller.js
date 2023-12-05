@@ -18,10 +18,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../../../config");
 const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        
         const userInfo = req.body;
         const result = yield User_service_1.userService.createUser(userInfo);
-        
         res.status(200).send({
             action: true,
             result
@@ -38,13 +36,9 @@ const SignInUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     try {
         //@ts-ignore
         const { email } = req.body;
-       
         const result = yield User_service_1.userService.SignInUser(email);
-        
         if ((_a = result[0]) === null || _a === void 0 ? void 0 : _a.email) {
-           
             const accesstoken = yield jsonwebtoken_1.default.sign({ email: (_b = result[0]) === null || _b === void 0 ? void 0 : _b.email, role: (_c = result[0]) === null || _c === void 0 ? void 0 : _c.role }, config_1.config.accesstoken, { expiresIn: '3d' });
-           
             res.status(200).send({
                 action: true,
                 accesstoken

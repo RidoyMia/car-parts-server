@@ -21,7 +21,6 @@ const createServicesController = (req, res, next) => __awaiter(void 0, void 0, v
         });
     }
     catch (error) {
-     
         res.status(400).send({
             message: 'something went wrong'
         });
@@ -30,7 +29,6 @@ const createServicesController = (req, res, next) => __awaiter(void 0, void 0, v
 const getAllService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield bestService_service_1.BestServices.getAllService();
-       
         res.status(200).send({
             action: true,
             result

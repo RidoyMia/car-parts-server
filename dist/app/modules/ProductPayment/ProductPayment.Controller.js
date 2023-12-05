@@ -21,15 +21,14 @@ const sslcommerz_lts_1 = __importDefault(require("sslcommerz-lts"));
 const mongodb_1 = require("mongodb");
 const product_model_1 = require("../product/product.model");
 const ProductPayment_model_1 = require("./ProductPayment.model");
+const ProductPayment_services_1 = require("./ProductPayment.services");
 const createProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const session = mongoose_1.default.startSession();
     try {
         (yield session).startTransaction();
         const productInfo = req.body;
-       
         //@ts-ignore
         const gettingProdut = yield product_model_1.productModel.find({ _id: productInfo.id });
-        
         const newId = new mongodb_1.ObjectId().toString();
         const data = {
             total_amount: gettingProdut[0].price,
@@ -68,11 +67,9 @@ const createProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 
             let GatewayPageURL = apiResponse.GatewayPageURL;
             const orderInfo = Object.assign(Object.assign({}, productInfo), { transaction: newId, paid: false });
             const insertOrder = yield ProductPayment_model_1.ProductPaymentModel.create(Object.assign({}, orderInfo));
-          
             res.status(200).send({
                 url: GatewayPageURL
             });
-           
         }));
         (yield session).commitTransaction();
     }
@@ -87,11 +84,10 @@ const createProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 
 const productPaymentUpdate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-       
         const result = yield ProductPayment_model_1.ProductPaymentModel.updateOne({ transaction: id }, { $set: {
                 paid: true
             } });
-        res.redirect(`http://localhost:5173/success/${id}`);
+        res.redirect(`http://localhost:5173/productDetails/${id}`);
     }
     catch (error) {
         res.status(400).send({
@@ -99,6 +95,36 @@ const productPaymentUpdate = (req, res, next) => __awaiter(void 0, void 0, void 
         });
     }
 });
+const getProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const result = yield ProductPayment_model_1.ProductPaymentModel.find({ transaction: id }).populate('id');
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
+const getSingleUsersPaymentInfoController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const email = req.params.email;
+        const result = yield ProductPayment_services_1.ServicePaymentServices.getSingleUsersPaymentInfo(email);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(200).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.ProductPaymentController = {
-    createProductPayment, productPaymentUpdate
+    createProductPayment, productPaymentUpdate, getProductPayment, getSingleUsersPaymentInfoController
 };

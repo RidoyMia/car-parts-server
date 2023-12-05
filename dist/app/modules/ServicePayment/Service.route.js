@@ -10,4 +10,5 @@ const ServicePaymentRouter = express_1.default.Router();
 ServicePaymentRouter.post('/create', ServicePayment_controller_1.PaymentController.createPaymentController);
 ServicePaymentRouter.post('/update/:id', ServicePayment_controller_1.PaymentController.updatePaymentController);
 ServicePaymentRouter.get('/:id', ServicePayment_controller_1.PaymentController.getPaymentData);
+ServicePaymentRouter.get('/user/:email', ServicePayment_controller_1.PaymentController.getSingleUsersPaymentInfoServiceController);
 exports.default = ServicePaymentRouter;
