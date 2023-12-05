@@ -32,15 +32,17 @@ const createUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
 });
 const SignInUserController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     try {
         //@ts-ignore
         const { email } = req.body;
         const result = yield User_service_1.userService.SignInUser(email);
+        console.log(result, 'signin user response');
         if ((_a = result[0]) === null || _a === void 0 ? void 0 : _a.email) {
             const accesstoken = yield jsonwebtoken_1.default.sign({ email: (_b = result[0]) === null || _b === void 0 ? void 0 : _b.email, role: (_c = result[0]) === null || _c === void 0 ? void 0 : _c.role }, config_1.config.accesstoken, { expiresIn: '3d' });
             res.status(200).send({
                 action: true,
+                role: (_d = result[0]) === null || _d === void 0 ? void 0 : _d.role,
                 accesstoken
             });
         }
