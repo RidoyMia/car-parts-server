@@ -116,7 +116,20 @@ const getSingleUsersPaymentInfoController = async(req:Request,res:Response,next:
         })
     }
 }
+const getTotalProductPayment =  async(req:Request,res:Response,next:NextFunction) =>{
+    try {
+        const result = await ServicePaymentServices.totalProducPayment();
+        res.status(200).send({
+            action : true,
+            result
+        })
+    } catch (error) {
+        res.status(400).send({
+            message : 'something went wrong'
+        })
+    }
+}
 
 export const ProductPaymentController = {
-    createProductPayment,productPaymentUpdate,getProductPayment,getSingleUsersPaymentInfoController
+    createProductPayment,productPaymentUpdate,getProductPayment,getSingleUsersPaymentInfoController,getTotalProductPayment
 }

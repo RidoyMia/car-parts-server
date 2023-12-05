@@ -125,6 +125,20 @@ const getSingleUsersPaymentInfoController = (req, res, next) => __awaiter(void 0
         });
     }
 });
+const getTotalProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield ProductPayment_services_1.ServicePaymentServices.totalProducPayment();
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.ProductPaymentController = {
-    createProductPayment, productPaymentUpdate, getProductPayment, getSingleUsersPaymentInfoController
+    createProductPayment, productPaymentUpdate, getProductPayment, getSingleUsersPaymentInfoController, getTotalProductPayment
 };

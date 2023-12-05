@@ -11,4 +11,5 @@ ProductPaymentRouter.post('/create', ProductPayment_Controller_1.ProductPaymentC
 ProductPaymentRouter.post('/update/:id', ProductPayment_Controller_1.ProductPaymentController.productPaymentUpdate);
 ProductPaymentRouter.get('/product/:id', ProductPayment_Controller_1.ProductPaymentController.getProductPayment);
 ProductPaymentRouter.get('/user/:email', AuthGurd_1.AuthGuard, ProductPayment_Controller_1.ProductPaymentController.getSingleUsersPaymentInfoController);
+ProductPaymentRouter.get('/all', ProductPayment_Controller_1.ProductPaymentController.getTotalProductPayment);
 exports.default = ProductPaymentRouter;
