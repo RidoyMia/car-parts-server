@@ -9,7 +9,7 @@ const getSingleUsersPaymentInfo = async(email : string) : Promise<IServicePaymen
 }
 const totalProducPayment = async(page : number) : Promise<IproductPayment[] | any> =>{
   const skip = (page -1) * 10;
-  console.log(page,'pagege');
+  
   const result = await ProductPaymentModel.find({}).skip(skip).limit(10);
   const total = await ProductPaymentModel.countDocuments()
   return {result,total}

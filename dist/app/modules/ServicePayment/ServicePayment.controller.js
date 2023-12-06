@@ -124,6 +124,22 @@ const getSingleUsersPaymentInfoServiceController = (req, res, next) => __awaiter
         });
     }
 });
+const getAllServicesPaymentController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        //@ts-ignore
+        const page = parseInt(req.query.page);
+        const result = yield ServicePayment_service_1.ServicePaymentServices.getAllServicesPayment(page);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.PaymentController = {
-    createPaymentController, updatePaymentController, getPaymentData, getSingleUsersPaymentInfoServiceController
+    createPaymentController, updatePaymentController, getPaymentData, getSingleUsersPaymentInfoServiceController, getAllServicesPaymentController
 };

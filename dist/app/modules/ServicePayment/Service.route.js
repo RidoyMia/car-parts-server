@@ -11,4 +11,5 @@ ServicePaymentRouter.post('/create', ServicePayment_controller_1.PaymentControll
 ServicePaymentRouter.post('/update/:id', ServicePayment_controller_1.PaymentController.updatePaymentController);
 ServicePaymentRouter.get('/:id', ServicePayment_controller_1.PaymentController.getPaymentData);
 ServicePaymentRouter.get('/user/:email', ServicePayment_controller_1.PaymentController.getSingleUsersPaymentInfoServiceController);
+ServicePaymentRouter.get('/all', ServicePayment_controller_1.PaymentController.getAllServicesPaymentController);
 exports.default = ServicePaymentRouter;

@@ -15,6 +15,12 @@ const getSingleUsersPaymentInfoService = (email) => __awaiter(void 0, void 0, vo
     const result = yield ServicePayment_model_1.ServicePaymentModel.find({ email: email }).populate('productId');
     return result;
 });
+const getAllServicesPayment = (page) => __awaiter(void 0, void 0, void 0, function* () {
+    const skip = (page - 1) * 10;
+    const result = yield ServicePayment_model_1.ServicePaymentModel.find({}).skip(skip).limit(10);
+    const total = yield ServicePayment_model_1.ServicePaymentModel.countDocuments();
+    return { result, total };
+});
 exports.ServicePaymentServices = {
-    getSingleUsersPaymentInfoService
+    getSingleUsersPaymentInfoService, getAllServicesPayment
 };

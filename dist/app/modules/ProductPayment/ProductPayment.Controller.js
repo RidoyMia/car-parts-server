@@ -127,7 +127,11 @@ const getSingleUsersPaymentInfoController = (req, res, next) => __awaiter(void 0
 });
 const getTotalProductPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield ProductPayment_services_1.ServicePaymentServices.totalProducPayment();
+        //@ts-ignore
+        const page = parseInt(req.query.page);
+        console.log();
+        const result = yield ProductPayment_services_1.ServicePaymentServices.totalProducPayment(page);
+        console.log(result);
         res.status(200).send({
             action: true,
             result

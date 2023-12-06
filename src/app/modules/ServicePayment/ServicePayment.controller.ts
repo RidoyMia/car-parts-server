@@ -117,7 +117,8 @@ const createPaymentController = async (req: Request, res: Response, next: NextFu
   const getAllServicesPaymentController = async (req: Request, res: Response, next: NextFunction) =>{
     try {
       //@ts-ignore
-      const page = parseInt(req.query.page)
+      const page = parseInt(req.query.page);
+      console.log(page,'service payment');
       const result = await ServicePaymentServices.getAllServicesPayment(page)
       res.status(200).send({
         action : true,

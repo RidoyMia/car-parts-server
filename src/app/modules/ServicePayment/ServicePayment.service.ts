@@ -6,7 +6,8 @@ const getSingleUsersPaymentInfoService = async(email : string) : Promise<IServic
     return result
 }
 const getAllServicesPayment = async(page : number) : Promise<IServicePayment[] | any> =>{
-    const skip = (page -1) * 10
+    const skip = (page -1) * 10;
+    console.log(page,'service');
     const result = await ServicePaymentModel.find({}).skip(skip).limit(10)
     const total = await ServicePaymentModel.countDocuments();
     return {result,total}
