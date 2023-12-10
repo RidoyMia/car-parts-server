@@ -5,4 +5,5 @@ userRouter.post('/create',UserController.createUserController);
 userRouter.post('/signin',UserController.SignInUserController)
 userRouter.get('/all',UserController.getAllUsersController);
 userRouter.get('/:email',UserController.IsAdingController);
+userRouter.get('/role/:email',UserController.getUserRoleController);
 export default userRouter;

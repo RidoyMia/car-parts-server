@@ -85,8 +85,22 @@ const IsAdingController = async(req:Request,res:Response,next:NextFunction) :Pro
     
  }    
 }
+const getUserRoleController = async(req:Request,res:Response,next:NextFunction) :Promise<Iuser | any> =>{
+    try {
+        const email = req.params.email;
+        const result = await userService.getUserRole(email);
+        res.status(200).send({
+            action : true,
+            result
+        })
+    } catch (error) {
+        res.status(400).send({
+            message : 'something went wrong'
+        })
+    }
+}
 
 export const UserController = {
     createUserController,
-    SignInUserController,getAllUsersController,IsAdingController
+    SignInUserController,getAllUsersController,IsAdingController,getUserRoleController
 }
