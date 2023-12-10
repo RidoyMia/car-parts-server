@@ -61,11 +61,28 @@ try {
     })
 }
 } 
+const updateSingleProductController =async(req:Request,res:Response,next:NextFunction) : Promise<Iproduct | any> =>{
+    try {
+        const id = req.params.id;
+        const {productInfo}  = req.body;
+        console.log(productInfo,'updateinfo');
+        const result = await ProductService.updateSingleProductService(id,productInfo);
+        res.status(200).send({
+            action : true,
+            result
+        })
+    } catch (error) {
+        res.status(400).send({
+            message : 'something went wrong'
+        })
+    }
+}
 
 
 export const ProductController = {
     createProductContoller,
     getAllProduct,
     getSingleProductController,
-    deletedSingleProductController
+    deletedSingleProductController,
+    updateSingleProductController
 }

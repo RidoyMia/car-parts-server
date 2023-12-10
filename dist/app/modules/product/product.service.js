@@ -23,8 +23,13 @@ const getSingleProduct = (id) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield product_model_1.productModel.findById(id);
     return result;
 });
+const deletedSingleProduct = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.productModel.deleteOne({ _id: id });
+    return result;
+});
 exports.ProductService = {
     createProduct,
     getAllProduct,
-    getSingleProduct
+    getSingleProduct,
+    deletedSingleProduct
 };

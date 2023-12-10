@@ -17,6 +17,7 @@ const getSingleUsersPaymentInfoService = (email) => __awaiter(void 0, void 0, vo
 });
 const getAllServicesPayment = (page) => __awaiter(void 0, void 0, void 0, function* () {
     const skip = (page - 1) * 10;
+    console.log(page, 'service');
     const result = yield ServicePayment_model_1.ServicePaymentModel.find({}).skip(skip).limit(10);
     const total = yield ServicePayment_model_1.ServicePaymentModel.countDocuments();
     return { result, total };

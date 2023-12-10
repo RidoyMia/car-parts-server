@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_service_1 = require("./product.service");
-const createProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const createProductContoller = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productData = req.body;
         const result = yield product_service_1.ProductService.createProduct(productData);
@@ -55,8 +55,24 @@ const getSingleProductController = (req, res, next) => __awaiter(void 0, void 0,
         });
     }
 });
+const deletedSingleProductController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const result = yield product_service_1.ProductService.deletedSingleProduct(id);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.ProductController = {
-    createProduct,
+    createProductContoller,
     getAllProduct,
-    getSingleProductController
+    getSingleProductController,
+    deletedSingleProductController
 };

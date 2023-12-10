@@ -9,7 +9,7 @@ const ServicePaymentRouter = express_1.default.Router();
 //@ts-ignore
 ServicePaymentRouter.post('/create', ServicePayment_controller_1.PaymentController.createPaymentController);
 ServicePaymentRouter.post('/update/:id', ServicePayment_controller_1.PaymentController.updatePaymentController);
-ServicePaymentRouter.get('/:id', ServicePayment_controller_1.PaymentController.getPaymentData);
 ServicePaymentRouter.get('/user/:email', ServicePayment_controller_1.PaymentController.getSingleUsersPaymentInfoServiceController);
 ServicePaymentRouter.get('/all', ServicePayment_controller_1.PaymentController.getAllServicesPaymentController);
+ServicePaymentRouter.get('/:id', ServicePayment_controller_1.PaymentController.getPaymentData);
 exports.default = ServicePaymentRouter;

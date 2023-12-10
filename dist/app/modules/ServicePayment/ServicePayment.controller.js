@@ -128,6 +128,7 @@ const getAllServicesPaymentController = (req, res, next) => __awaiter(void 0, vo
     try {
         //@ts-ignore
         const page = parseInt(req.query.page);
+        console.log(page, 'service payment');
         const result = yield ServicePayment_service_1.ServicePaymentServices.getAllServicesPayment(page);
         res.status(200).send({
             action: true,
