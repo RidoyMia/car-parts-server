@@ -90,7 +90,22 @@ const IsAdingController = (req, res, next) => __awaiter(void 0, void 0, void 0, 
     catch (error) {
     }
 });
+const getUserRoleController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const email = req.params.email;
+        const result = yield User_service_1.userService.getUserRole(email);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.UserController = {
     createUserController,
-    SignInUserController, getAllUsersController, IsAdingController
+    SignInUserController, getAllUsersController, IsAdingController, getUserRoleController
 };

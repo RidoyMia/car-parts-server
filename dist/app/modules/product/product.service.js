@@ -27,9 +27,20 @@ const deletedSingleProduct = (id) => __awaiter(void 0, void 0, void 0, function*
     const result = yield product_model_1.productModel.deleteOne({ _id: id });
     return result;
 });
+const updateSingleProductService = (id, productInfo) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = product_model_1.productModel.updateOne({ _id: id }, { $set: {
+            name: productInfo.name,
+            descriptions: productInfo.descriptions,
+            price: productInfo.price,
+            rating: productInfo.rating,
+            picture: productInfo.picture
+        } });
+    return result;
+});
 exports.ProductService = {
     createProduct,
     getAllProduct,
     getSingleProduct,
-    deletedSingleProduct
+    deletedSingleProduct,
+    updateSingleProductService
 };

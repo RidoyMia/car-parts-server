@@ -14,6 +14,7 @@ const service_services_1 = require("./service.services");
 const createProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productData = req.body;
+        console.log(productData, 'serviceData');
         const result = yield service_services_1.servicesService.createProductService(productData);
         res.status(200).send({
             action: true,
@@ -56,8 +57,42 @@ const getSingleProductController = (req, res, next) => __awaiter(void 0, void 0,
         });
     }
 });
+const deletedServiceController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const result = yield service_services_1.servicesService.deletedProductService(id);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
+const updatedSingleServiceController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const productInfo = req.body;
+        console.log(productInfo, 'updateServices info');
+        const result = yield service_services_1.servicesService.updatedSingleService(id, productInfo);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.ServicesController = {
     createProduct,
     getAllProduct,
-    getSingleProductController
+    getSingleProductController,
+    deletedServiceController,
+    updatedSingleServiceController
 };

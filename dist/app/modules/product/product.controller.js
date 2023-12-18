@@ -70,9 +70,27 @@ const deletedSingleProductController = (req, res, next) => __awaiter(void 0, voi
         });
     }
 });
+const updateSingleProductController = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const { productInfo } = req.body;
+        console.log(productInfo, 'updateinfo');
+        const result = yield product_service_1.ProductService.updateSingleProductService(id, productInfo);
+        res.status(200).send({
+            action: true,
+            result
+        });
+    }
+    catch (error) {
+        res.status(400).send({
+            message: 'something went wrong'
+        });
+    }
+});
 exports.ProductController = {
     createProductContoller,
     getAllProduct,
     getSingleProductController,
-    deletedSingleProductController
+    deletedSingleProductController,
+    updateSingleProductController
 };

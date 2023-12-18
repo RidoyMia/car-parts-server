@@ -9,4 +9,6 @@ const ServicesRouter = express_1.default.Router();
 ServicesRouter.post('/create', services_controller_1.ServicesController.createProduct);
 ServicesRouter.get('/all', services_controller_1.ServicesController.getAllProduct);
 ServicesRouter.get('/:id', services_controller_1.ServicesController.getSingleProductController);
+ServicesRouter.delete('/:id', services_controller_1.ServicesController.deletedServiceController);
+ServicesRouter.patch('/:id', services_controller_1.ServicesController.updatedSingleServiceController);
 exports.default = ServicesRouter;

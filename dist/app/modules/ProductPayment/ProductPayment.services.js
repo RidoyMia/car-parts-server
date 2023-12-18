@@ -17,7 +17,7 @@ const getSingleUsersPaymentInfo = (email) => __awaiter(void 0, void 0, void 0, f
 });
 const totalProducPayment = (page) => __awaiter(void 0, void 0, void 0, function* () {
     const skip = (page - 1) * 10;
-    const result = yield ProductPayment_model_1.ProductPaymentModel.find({}).skip(skip).limit(10);
+    const result = yield ProductPayment_model_1.ProductPaymentModel.find({}).skip(skip).limit(10).populate('id');
     const total = yield ProductPayment_model_1.ProductPaymentModel.countDocuments();
     return { result, total };
 });

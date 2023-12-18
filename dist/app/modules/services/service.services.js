@@ -23,8 +23,26 @@ const getSingleProductService = (id) => __awaiter(void 0, void 0, void 0, functi
     const result = yield services_model_1.ServiceModel.findById(id);
     return result;
 });
+const deletedProductService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield services_model_1.ServiceModel.deleteOne({ _id: id });
+    return result;
+});
+const updatedSingleService = (id, productData) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield services_model_1.ServiceModel.updateOne({ _id: id }, { $set: {
+            name: productData === null || productData === void 0 ? void 0 : productData.name,
+            descriptions: productData === null || productData === void 0 ? void 0 : productData.descriptions,
+            price: productData === null || productData === void 0 ? void 0 : productData.price,
+            picture: productData === null || productData === void 0 ? void 0 : productData.picture,
+            rating: productData === null || productData === void 0 ? void 0 : productData.rating,
+            needTime: productData === null || productData === void 0 ? void 0 : productData.needTime,
+            OldPrice: productData === null || productData === void 0 ? void 0 : productData.OldPrice
+        } });
+    return result;
+});
 exports.servicesService = {
     createProductService,
     getAllProductService,
-    getSingleProductService
+    getSingleProductService,
+    deletedProductService,
+    updatedSingleService
 };
