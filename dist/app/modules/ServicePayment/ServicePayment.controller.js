@@ -86,7 +86,7 @@ const updatePaymentController = (req, res, next) => __awaiter(void 0, void 0, vo
         const result = yield ServicePayment_model_1.ServicePaymentModel.updateOne({ transaction: tran_id }, { $set: {
                 paid: true
             } });
-        res.redirect(`http://localhost:5173/success/${tran_id}`);
+        res.redirect(`https://car-pats-client.vercel.app/success/${tran_id}`);
     }
     catch (error) {
         res.status(400).send({
