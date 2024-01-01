@@ -34,7 +34,7 @@ const createPaymentController = (req, res, next) => __awaiter(void 0, void 0, vo
             currency: 'USD',
             tran_id: newId,
             // use unique tran_id for each api call
-            success_url: `http://localhost:7000/api/v1/servicePayment/update/${newId}`,
+            success_url: `https://car-repairing-server.vercel.app/api/v1/servicePayment/update/${newId}`,
             fail_url: 'http://localhost:3030/fail',
             cancel_url: 'http://localhost:3030/cancel',
             ipn_url: 'http://localhost:3030/ipn',

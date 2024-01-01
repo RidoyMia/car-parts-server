@@ -77,7 +77,7 @@ const createPaymentController = async (req: Request, res: Response, next: NextFu
         const result = await ServicePaymentModel.updateOne({transaction : tran_id},{$set : {
             paid : true
         }})
-        res.redirect(`http://localhost:5173/success/${tran_id}`)
+        res.redirect(`https://car-pats-client.vercel.app/success/${tran_id}`)
     } catch (error) {
         res.status(400).send({
             message : 'something went wrong'
